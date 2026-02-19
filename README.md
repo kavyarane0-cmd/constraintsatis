@@ -1,0 +1,82 @@
+## Objective: To study Constraint Satisfaction method and Solve Constraint Satisfaction problem such as SEND+MORE=MONEY Or CROSS+ ROADS=DANGER
+
+## Input: Initial values for some letters in the given problem
+## Output: Unique values for letters S, E, N, D, M, O, R, Y or C, R, O, S, A, D, N, G, E
+
+## Tools
+- Python
+- Google Colab
+
+```python
+from itertools import permutations
+
+#SEND+MORE=MONEY
+def solve_money():
+    letters=('S','E','N','D','M','O','R','Y')
+    digits=range(10)
+
+    for perm in permutations(digits,len(letters)):
+        S,E,N,D,M,O,R,Y=perm
+        if S==0 or M==0:
+            continue
+
+        send=1000*S+100*E+10*N+D
+        more=1000*M+100*O+10*R+E
+        money=10000*M+1000*O+100*N+10*E+Y
+
+        if send+more == money:
+            print("Solution Found:")
+            for l,d in zip(letters, perm):
+                print(l,"=",d)
+            return
+
+    print("No solution found")
+
+
+#CROSS+ROADS=DANGER
+def solve_danger():
+    letters=('C','R','O','S','A','D','N','G','E')
+    digits=range(10)
+
+    for perm in permutations(digits,len(letters)):
+        C,R,O,S,A,D,N,G,E=perm
+        if C==0 or R==0 or D==0:
+            continue
+
+        cross=10000*C+1000*R+100*O+10*S+S
+        roads=10000*R+1000*O+ 100*A+10*D+S
+        danger=100000*D+10000*A+1000*N+100*G+10*E+R
+
+        if cross+roads==danger:
+            print("\nSolution Found:")
+            for l, d in zip(letters,perm):
+                print(l,"=",d)
+            return
+
+    print("No solution found")
+solve_money()
+solve_danger()
+```
+
+
+## Output
+Solution Found:
+S = 9
+E = 5
+N = 6
+D = 7
+M = 1
+O = 0
+R = 8
+Y = 2
+
+Solution Found:
+C = 9
+R = 6
+O = 2
+S = 3
+A = 5
+D = 1
+N = 8
+G = 7
+E = 4
